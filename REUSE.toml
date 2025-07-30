@@ -1,0 +1,10 @@
+version = 1
+SPDX-PackageName = "perplexity-telegram-bot"
+SPDX-PackageSupplier = "Person: Damian Fajfer <damian@fajfer.org>"
+SPDX-PackageDownloadLocation = "https://github.com/fajfer/perplexity-telegram-bot"
+
+[[annotations]]
+path = ["requirements.txt", ".gitignore", ".env", ".dockerignore"]
+precedence = "closest"
+SPDX-FileCopyrightText = "2025 Damian Fajfer <damian@fajfer.org>"
+SPDX-License-Identifier = "CC0-1.0"
