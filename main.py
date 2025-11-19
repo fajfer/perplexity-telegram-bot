@@ -95,13 +95,22 @@ async def handle_all_messages(update: Update, context: ContextTypes.DEFAULT_TYPE
             logger.error(f"Received unauthorized message in chat {message.chat.id} from user {message.from_user.id}: {message.text}")
             await message.reply_text(f"Unauthorized. Contact {TELEGRAM_OWNER_USERNAME} for access.")
             return
+        
+        # Check if this message is a reply to another message
+        full_prompt = user_text
+        if message.reply_to_message and message.reply_to_message.text:
+            replied_message_text = message.reply_to_message.text
+            logger.info(f"Message is a reply. Original message: {replied_message_text[:50]}...")
+            # Combine the replied-to message with the user's message
+            full_prompt = f"Reply to: {replied_message_text}\n\nUser's question: {user_text}"
+        
         logger.info(f"Processing user text: {user_text}")
         if user_text is None or user_text == "":
             return
         # Send "typing" action to show the bot is working
         await context.bot.send_chat_action(chat_id=message.chat_id, action="typing")
         # Make request to Perplexity AI
-        ai_response = make_perplexity_request(user_text)
+        ai_response = make_perplexity_request(full_prompt)
         if "<think>" in ai_response:
             stripped_response = strip_think_blocks(ai_response)
         else:
