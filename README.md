@@ -16,6 +16,7 @@ There's plenty of opportunities (eg. mobile operator promotions) to get a one ye
 
 The bot responds to:
 - **@mentions**: `@your_bot_username your question`
+- **Reply with @mention**: When you reply to a message and mention the bot, it will include the original message content as context
 
 The bot ignores:
 - All other messages and commands (e.g., `/start`, `/help`, `/ct` etc.)
